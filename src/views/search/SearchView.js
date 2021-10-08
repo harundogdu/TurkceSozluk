@@ -1,12 +1,15 @@
 import React from 'react';
-import {View, Text, Button} from 'react-native';
+import {Text, Button} from 'react-native';
+import Box from '../../components/Box/BoxDefault';
+import BoxCenter from '../../components/Box/BoxCenter';
 /* Search Function */
 const SearchView = ({navigation}) => {
   return (
-    <View>
+    <BoxCenter>
       <Text>SearchView</Text>
       <Button title="Go Detail" onPress={() => navigation.navigate('Detail')} />
-    </View>
+      <Box size={20} bg="blue" mt={20} />
+    </BoxCenter>
   );
 };
 
