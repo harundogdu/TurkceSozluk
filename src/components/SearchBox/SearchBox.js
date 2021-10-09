@@ -12,23 +12,8 @@ function SearchBox({ onChangeFocus }) {
   const [isFocus, setIsFocus] = useState(false);
   const [searchingText, setSearchingText] = useState('');
   useEffect(() => {
-    const showSubscription = Keyboard.addListener(
-      'keyboardDidShow',
-      showSubscriptionFocus,
-    );
-    const hideSubscription = Keyboard.addListener(
-      'keyboardDidHide',
-      hideSubscriptionFocus,
-    );
-    return () => {
-      showSubscription.remove();
-      hideSubscription.remove();
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const showSubscriptionFocus = () => onChangeFocus(true);
-  const hideSubscriptionFocus = () => onChangeFocus(false);
+    onChangeFocus(isFocus);
+  }, [onChangeFocus, isFocus]);
 
   const onDismissKeyboard = () => {
     setIsFocus(false);

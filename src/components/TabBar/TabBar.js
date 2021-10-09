@@ -33,10 +33,8 @@ function TabBar({ state, descriptors, navigation }) {
           /* Search Button */
           <Box key={label} p={15} bg="white" borderRadius="full" mt={-15}>
             <Button
-              key={label}
               size={56}
               bg="red"
-              mb={4}
               borderRadius="full"
               onPress={onPress}
               height={56}>
