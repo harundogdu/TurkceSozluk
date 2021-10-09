@@ -8,6 +8,6 @@ export default StyleSheet.create({
     },
     shadowOpacity: 0.1,
     shadowRadius: 24,
-    elevation: 0,
+    elevation: 10,
   },
 });

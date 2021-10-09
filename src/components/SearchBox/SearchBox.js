@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Box from '../Box/BoxDefault';
 import Input from '../InputBox';
@@ -8,13 +8,33 @@ import Button from '../Button';
 import { Keyboard } from 'react-native';
 import styles from './SearchBox.style';
 /* Search Box */
-function SearchBox() {
+function SearchBox({ onChangeFocus }) {
   const [isFocus, setIsFocus] = useState(false);
   const [searchingText, setSearchingText] = useState('');
+  useEffect(() => {
+    const showSubscription = Keyboard.addListener(
+      'keyboardDidShow',
+      showSubscriptionFocus,
+    );
+    const hideSubscription = Keyboard.addListener(
+      'keyboardDidHide',
+      hideSubscriptionFocus,
+    );
+    return () => {
+      showSubscription.remove();
+      hideSubscription.remove();
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const showSubscriptionFocus = () => onChangeFocus(true);
+  const hideSubscriptionFocus = () => onChangeFocus(false);
+
   const onDismissKeyboard = () => {
     setIsFocus(false);
     Keyboard.dismiss();
   };
+
   return (
     <Box position="relative" flexDirection="row" alignItems="center">
       <Button
