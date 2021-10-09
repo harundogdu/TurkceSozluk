@@ -8,9 +8,10 @@ import {
   flexbox,
   layout,
   borderRadius,
+  position,
 } from 'styled-system';
 const Button = styled(TouchableOpacity)(
-  compose(color, size, space, flexbox, layout, borderRadius),
+  compose(color, size, space, flexbox, layout, borderRadius, position),
 );
 Button.defaultProps = {
   flexDirection: 'row',

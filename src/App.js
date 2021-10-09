@@ -19,7 +19,7 @@ const Tab = createBottomTabNavigator();
 /* Search function */
 const SearchStack = () => {
   return (
-    <HomeStack.Navigator>
+    <HomeStack.Navigator screenOptions={{ headerShown: false }}>
       <HomeStack.Screen name="Search" component={SearchView} />
       <HomeStack.Screen name="Detail" component={DetailView} />
     </HomeStack.Navigator>
