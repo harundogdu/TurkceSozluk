@@ -1,11 +1,11 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import Button from '../Button/Button';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Box from '../Box/BoxDefault';
 function TabBar({ state, descriptors, navigation }) {
   return (
-    <View style={styles.container}>
+    <Box style={styles.container}>
       {state.routes.map((route, index) => {
         const { options } = descriptors[route.key];
         const label =
@@ -30,6 +30,7 @@ function TabBar({ state, descriptors, navigation }) {
         };
 
         return label === 'SearchStack' ? (
+          /* Search Button */
           <Box key={label} p={15} bg="white" borderRadius="full" mt={-15}>
             <Button
               key={label}
@@ -43,6 +44,7 @@ function TabBar({ state, descriptors, navigation }) {
             </Button>
           </Box>
         ) : (
+          /* other Bottom Buttons */
           <Button
             key={label}
             pt={6}
@@ -50,22 +52,49 @@ function TabBar({ state, descriptors, navigation }) {
             flex={1}
             onPress={onPress}
             height={56}>
+            {/* History Button */}
             {label === 'History' && (
-              <Icon name="backup-restore" size={28} color="gray" />
+              <Icon
+                name="backup-restore"
+                size={28}
+                color={isFocused ? 'red' : 'gray'}
+              />
             )}
+            {/* Favourite Button */}
             {label === 'Favourite' && (
-              <Icon name="bookmark-outline" size={28} color="gray" />
+              <Icon
+                name="bookmark-outline"
+                size={28}
+                color={isFocused ? 'red' : 'gray'}
+              />
             )}
-            <Box size={3} bg={isFocused ? 'red' : 'white'} mt={6} />
+            {/* indicator */}
+            <Box
+              borderRadius="full"
+              size={3}
+              bg={isFocused ? 'red' : 'white'}
+              mt={6}
+            />
           </Button>
         );
       })}
-    </View>
+    </Box>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flexDirection: 'row', backgroundColor: 'white' },
+  container: {
+    flexDirection: 'row',
+    backgroundColor: 'white',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 1,
+      height: 4,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 20,
+    elevation: 10,
+  },
 });
 
 export default TabBar;
