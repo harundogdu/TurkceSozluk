@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { Keyboard } from 'react-native';
+/* components */
 import Box from '../Box/BoxDefault';
 import Input from '../InputBox';
 import theme from '../../utils/theme';
-import { Text } from 'react-native';
+import Text from '../Text';
 import Button from '../Button';
-import { Keyboard } from 'react-native';
+/* styles */
 import styles from './SearchBox.style';
 /* Search Box */
 function SearchBox({ onChangeFocus }) {
@@ -34,7 +36,6 @@ function SearchBox({ onChangeFocus }) {
       <Box position="relative" flex={1}>
         <Input
           clearButtonMode="always"
-          style={styles.input}
           height={52}
           bg="softRed"
           color="textDark"
@@ -42,7 +43,7 @@ function SearchBox({ onChangeFocus }) {
           placeholderTextColor="textMedium"
           pl={52}
           borderWidth={1}
-          borderColor={isFocus ? '#D1D1D1' : 'transparent'}
+          borderColor={isFocus ? '#D1D1D1' : '#ededed'}
           borderRadius="normal"
           value={searchingText}
           onChangeText={setSearchingText}
