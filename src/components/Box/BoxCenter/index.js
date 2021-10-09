@@ -1,1 +1,1 @@
-export {default} from './BoxCenter';
+export { default } from './BoxCenter';

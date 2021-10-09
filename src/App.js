@@ -1,8 +1,8 @@
 import React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {ThemeProvider} from 'styled-components';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { ThemeProvider } from 'styled-components';
 /* pages */
 import FavouriteView from './views/favourite';
 import HistoryView from './views/history';
@@ -31,7 +31,8 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <NavigationContainer>
         <Tab.Navigator
-          screenOptions={{headerShown: false}}
+          initialRouteName="SearchStack"
+          screenOptions={{ headerShown: false }}
           tabBar={props => <TabBar {...props} />}>
           <Tab.Screen name="History" component={HistoryView} />
           <Tab.Screen name="SearchStack" component={SearchStack} />

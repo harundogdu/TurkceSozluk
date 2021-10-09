@@ -1,13 +1,13 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import Button from '../Button/Button';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Box from '../Box/BoxDefault';
-function TabBar({state, descriptors, navigation}) {
+function TabBar({ state, descriptors, navigation }) {
   return (
     <View style={styles.container}>
       {state.routes.map((route, index) => {
-        const {options} = descriptors[route.key];
+        const { options } = descriptors[route.key];
         const label =
           options.tabBarLabel !== undefined
             ? options.tabBarLabel
@@ -25,7 +25,7 @@ function TabBar({state, descriptors, navigation}) {
           });
 
           if (!isFocused && !event.defaultPrevented) {
-            navigation.navigate({name: route.name, merge: true});
+            navigation.navigate({ name: route.name, merge: true });
           }
         };
 
@@ -65,7 +65,7 @@ function TabBar({state, descriptors, navigation}) {
 }
 
 const styles = StyleSheet.create({
-  container: {flexDirection: 'row'},
+  container: { flexDirection: 'row', backgroundColor: 'white' },
 });
 
 export default TabBar;
