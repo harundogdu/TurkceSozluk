@@ -1,13 +1,17 @@
 import React, { useRef, useState } from 'react';
-import { Animated, ImageBackground, Text } from 'react-native';
+import SafeAreaView from 'react-native-safe-area-view';
+/* react-native dependencies */
+import { LogBox } from 'react-native';
+import { Animated, ImageBackground } from 'react-native';
+/* components */
 import { Logo } from '../../components/icons';
 import SearchBox from '../../components/SearchBox';
 import Box from '../../components/Box/BoxDefault';
-import styles from './SearchView.style';
-import SafeAreaView from 'react-native-safe-area-view';
 import FocusAwareStatusBar from '../../utils/FocusAwareStatusBar';
-import { LogBox } from 'react-native';
-
+import Card, { CardSummary, CardTitle } from '../../components/Card/Card';
+import Text from '../../components/Text';
+/* styles */
+import styles from './SearchView.style';
 /* Search Function */
 const SearchView = () => {
   React.useEffect(() => {
@@ -56,14 +60,29 @@ const SearchView = () => {
         </Box>
       </Box>
       {/* Content */}
-      <Box flex={1} pt={keyboardStatus ? 0 : 26} bg="light">
+      <Box flex={1} pt={keyboardStatus ? 0 : 26} bg="softRed">
         {keyboardStatus ? (
           <Box p={30} flex={1}>
             <Text>History</Text>
           </Box>
         ) : (
-          <Box p={30} flex={1}>
-            <Text>Öneri </Text>
+          <Box px={16} py={30} flex={1}>
+            <Box>
+              <Text mb={10}>Bir Deyim</Text>
+              <Card>
+                <CardTitle>on para</CardTitle>
+                <CardSummary>çok az (para).</CardSummary>
+              </Card>
+            </Box>
+            <Box mt={30}>
+              <Text mb={10}>Bir deyim - Atasözü</Text>
+              <Card>
+                <CardTitle>siyem siyem ağlamak</CardTitle>
+                <CardSummary>
+                  hafif hafif, ince ince, durmadan gözyaşı dökmek
+                </CardSummary>
+              </Card>
+            </Box>
           </Box>
         )}
       </Box>
