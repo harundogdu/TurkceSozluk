@@ -13,6 +13,9 @@ import DetailView from './views/detail';
 import theme from './utils/theme';
 /* components */
 import TabBar from './components/TabBar';
+/* icon */
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Button from './components/Button';
 /* stack */
 const HomeStack = createNativeStackNavigator();
 /* Tab */
@@ -22,7 +25,40 @@ const SearchStack = () => {
   return (
     <HomeStack.Navigator screenOptions={{ headerShown: false }}>
       <HomeStack.Screen name="Search" component={SearchView} />
-      <HomeStack.Screen name="Detail" component={DetailView} />
+      <HomeStack.Screen
+        name="Detail"
+        component={DetailView}
+        options={({ route, navigation }) => {
+          return {
+            headerTitleAlign: 'center',
+            headerTintColor: theme.colors.textDark,
+            headerShadowVisible: false,
+            headerShown: true,
+            title: route.params && (route.params.title || 'Details'),
+            headerStyle: {
+              backgroundColor: theme.colors.softRed,
+            },
+            headerLeft: () => (
+              <Button p={10} onPress={() => navigation.navigate('Search')}>
+                <Icon
+                  name="chevron-left"
+                  size={28}
+                  color={theme.colors.textDark}
+                />
+              </Button>
+            ),
+            headerRight: () => (
+              <Button p={10} onPress={() => navigation.navigate('Search')}>
+                <Icon
+                  name="dots-horizontal"
+                  size={28}
+                  color={theme.colors.textDark}
+                />
+              </Button>
+            ),
+          };
+        }}
+      />
     </HomeStack.Navigator>
   );
 };
