@@ -1,11 +1,15 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+/* components */
+import Box from '../../components/Box/BoxDefault';
+import Text from '../../components/Text';
+import FocusAwareStatusBar from '../../utils/FocusAwareStatusBar';
 
 const DetailView = () => {
   return (
-    <View>
+    <Box bg="softRed" flex={1}>
+      <FocusAwareStatusBar barStyle="dark-content" backgroundColor="white" />
       <Text>DetailView</Text>
-    </View>
+    </Box>
   );
 };
 
