@@ -1,7 +1,8 @@
 import React, { useRef, useState } from 'react';
 import SafeAreaView from 'react-native-safe-area-view';
+import axios from 'axios';
 /* react-native dependencies */
-import { FlatList, LogBox } from 'react-native';
+import { ActivityIndicator, FlatList, LogBox } from 'react-native';
 import { Animated, ImageBackground } from 'react-native';
 /* components */
 import { Logo } from '../../components/icons';
@@ -12,21 +13,8 @@ import Card, { CardSummary, CardTitle } from '../../components/Card/Card';
 import Text from '../../components/Text';
 /* styles */
 import styles from './SearchView.style';
-const DATA = [
-  {
-    id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-    title: 'First Item',
-  },
-  {
-    id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-    title: 'Second Item',
-  },
-  {
-    id: '58694a0f-3da1-471f-bd96-145571e29d72',
-    title: 'Third Item',
-  },
-];
-
+/* data */
+import DATA from '../../@fake_db/db.json';
 /* Search Function */
 const SearchView = ({ navigation }) => {
   React.useEffect(() => {
@@ -35,6 +23,12 @@ const SearchView = ({ navigation }) => {
   const [keyboardStatus, setKeyboardStatus] = useState(false);
   const heroHeight = useRef(new Animated.Value(200)).current;
   const bgOpacity = useRef(new Animated.Value(1)).current;
+  const [homeData, setHomeData] = useState(null);
+
+  React.useEffect(() => {
+    getDataFromAPI();
+  }, []);
+
   React.useEffect(() => {
     Animated.timing(heroHeight, {
       toValue: keyboardStatus ? 84 : 200,
@@ -45,6 +39,12 @@ const SearchView = ({ navigation }) => {
       duration: keyboardStatus ? 300 : 300,
     }).start();
   }, [keyboardStatus, heroHeight, bgOpacity]);
+
+  const getDataFromAPI = async () => {
+    const { data } = await axios.get(`https://sozluk.gov.tr/icerik`);
+    setHomeData(data);
+  };
+
   return (
     <Box as={SafeAreaView} bg={keyboardStatus ? 'softRed' : 'red'} flex={1}>
       {/* StatusBar */}
@@ -57,7 +57,7 @@ const SearchView = ({ navigation }) => {
         height={heroHeight}>
         {/* logo */}
 
-        <Box as={Animated.View} opacity={bgOpacity}>
+        <Box as={Animated.View} style={{ opacity: bgOpacity }}>
           <Box
             as={ImageBackground}
             source={require('../../assets/images/bg.jpg')}
@@ -106,27 +106,37 @@ const SearchView = ({ navigation }) => {
         ) : (
           <Box px={16} py={30} flex={1}>
             <Box>
-              <Text mb={10}>Bir Deyim</Text>
+              <Text mb={10}>Bir Kelime</Text>
               <Card
                 onPress={() =>
                   navigation.navigate('Detail', { title: 'On Para' })
                 }>
-                <CardTitle>on para</CardTitle>
-                <CardSummary>çok az (para).</CardSummary>
+                {homeData ? (
+                  <>
+                    <CardTitle>{homeData?.kelime[0].madde}</CardTitle>
+                    <CardSummary>{homeData?.kelime[0].anlam}</CardSummary>
+                  </>
+                ) : (
+                  <ActivityIndicator />
+                )}
               </Card>
             </Box>
             <Box mt={30}>
-              <Text mb={10}>Bir deyim - Atasözü</Text>
+              <Text mb={10}>Bir Deyim - Atasözü</Text>
               <Card
                 onPress={() =>
                   navigation.navigate('Detail', {
                     title: 'siyem siyem ağlamak',
                   })
                 }>
-                <CardTitle>siyem siyem ağlamak</CardTitle>
-                <CardSummary>
-                  hafif hafif, ince ince, durmadan gözyaşı dökmek
-                </CardSummary>
+                {homeData ? (
+                  <>
+                    <CardTitle>{homeData?.atasoz[0].madde}</CardTitle>
+                    <CardSummary>{homeData?.atasoz[0].anlam}</CardSummary>
+                  </>
+                ) : (
+                  <ActivityIndicator />
+                )}
               </Card>
             </Box>
           </Box>
