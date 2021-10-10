@@ -44,7 +44,9 @@ const SearchView = ({ navigation }) => {
               title="Bir Kelime"
               data={homeData?.kelime[0]}
               onPress={() =>
-                navigation.navigate('Detail', { title: 'Deneme 1' })
+                navigation.navigate('Detail', {
+                  title: homeData?.kelime[0].madde,
+                })
               }
             />
             <SuggestionCard
@@ -52,7 +54,9 @@ const SearchView = ({ navigation }) => {
               title="Bir Deyim/Atasözü"
               data={homeData?.atasoz[0]}
               onPress={() =>
-                navigation.navigate('Detail', { title: 'Deneme 2' })
+                navigation.navigate('Detail', {
+                  title: homeData?.atasoz[0].madde,
+                })
               }
             />
           </Box>

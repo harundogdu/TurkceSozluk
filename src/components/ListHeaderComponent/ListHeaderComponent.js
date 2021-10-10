@@ -4,20 +4,20 @@ import Box from '../Box/BoxDefault';
 import Button from '../Button';
 import Text from '../Text';
 import styles from './ListHeaderComponent.style';
-const ListHeaderComponent = () => {
+const ListHeaderComponent = ({ title, lisan }) => {
   return (
     <Box bg="softRed">
       <Box py={8}>
         <Text fontSize={32} fontWeight="bold" color="textDark">
-          Detay
+          {title}
         </Text>
         <Text color="textLight" mt={4}>
-          Arapça kalem
+          {lisan === '' ? 'Türkçe kelime' : lisan}
         </Text>
       </Box>
       <Box flexDirection="row" py={8}>
         <Button style={styles.shadow} bg="white" borderRadius="full" p={10}>
-          <Icon name="volume-high" size={28} color="red" />
+          <Icon name="volume-high" size={28} />
         </Button>
         <Button
           style={styles.shadow}
