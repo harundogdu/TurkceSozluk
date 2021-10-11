@@ -70,7 +70,7 @@ const TabNavigator = () => {
         <NavigationContainer>
           <Tab.Navigator
             initialRouteName="SearchStack"
-            screenOptions={{ headerShown: false }}
+            screenOptions={{ headerShown: false, tabBarHideOnKeyboard: true }}
             tabBar={props => <TabBar {...props} />}>
             <Tab.Screen name="History" component={HistoryView} />
             <Tab.Screen name="SearchStack" component={SearchStack} />
